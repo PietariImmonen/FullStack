@@ -66,7 +66,7 @@ export default function App() {
   ]
 
   return (
-    <div>
+    <div className="1">
       <Header header={course}/>
       <Content 
       part = {parts}
