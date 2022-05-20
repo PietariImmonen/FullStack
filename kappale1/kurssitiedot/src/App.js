@@ -24,7 +24,7 @@ const Content = ({part}) => {
     <div>
       {part.map(p => {
         return(
-          <Part part={p.name} exercises={p.exercises}/>
+          <h1 key={p.id}><Part part={p.name} exercises={p.exercises} /></h1>
         )
       })}
     </div>
@@ -34,10 +34,21 @@ const Content = ({part}) => {
 
 
 
-const Total = (props) => {
+const Total = ({number}) => {
+  function sumAll() {
+    let i;
+    let sum = 0;
+    for (i = 0; i < number.length; i++) {
+      sum += number[i].exercises;
+    }
+    return sum;
+  }
+    
+  
+
   return (
     <div>
-      <p>Number of exercises {props.part[0].exercises + props.part[1].exercises + props.part[2].exercises}</p>
+      <p>{sumAll()}</p>
     </div>
   )
 }
@@ -49,6 +60,7 @@ const Course = ({course}) => {
       <Content 
       part = {course.parts}
       />
+      <Total number = {course.parts}/>
     </div>
   )
 }
