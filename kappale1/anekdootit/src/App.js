@@ -12,15 +12,26 @@ const App = () => {
   ]
    
   const [selected, setSelected] = useState(0)
+  const [points, setPoints] = useState([{point: 0}, {point: 0}, {point: 0}, {point: 0}, {point: 0}, {point: 0}, {point: 0}])
 
   function random() {
     setSelected(Math.floor(Math.random()*anecdotes.length))
   }
 
+  function increase() {
+    let oldPoints = [...points]
+    let oldItem = {...oldPoints[selected]}
+    oldItem.point ++
+    oldPoints[selected] = oldItem
+    setPoints(oldPoints)
+  }
+
   return (
     <div>
-      {anecdotes[selected]}
+      <p>{anecdotes[selected]}</p>
       <button onClick={random}>Click to get random</button>
+      <p>Points: {points[selected].point}</p>
+      <button onClick={increase}>Vote</button>
     </div>
   )
 }
