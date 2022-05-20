@@ -26,12 +26,21 @@ const App = () => {
     setPoints(oldPoints)
   }
 
+  function getMax() {
+    const max = points.reduce((prev, current) => (prev.point > current.point) ? prev : current)
+    return(points.indexOf(max))
+  }
+
+
   return (
     <div>
       <p>{anecdotes[selected]}</p>
       <button onClick={random}>Click to get random</button>
       <p>Points: {points[selected].point}</p>
       <button onClick={increase}>Vote</button>
+      <h1>Most upvotes</h1>
+      <button onClick={getMax}>Vote</button>
+      <p>{anecdotes[getMax()]}</p>
     </div>
   )
 }
