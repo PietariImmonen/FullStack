@@ -12,6 +12,14 @@ const Button = ({handleClick, text}) => {
   )
 }
 
+const StatisticsLine = ({show}) => {
+  return(
+    <div>
+      <p>{show}</p>
+    </div>
+  )
+}
+
 const Statistics = (props) => {
 
   if(props.good === 0 && props.neutral === 0 && props.bad === 0) {
@@ -48,12 +56,12 @@ const Statistics = (props) => {
       handleClick={props.makeBad}
       text="bad"
       />
-      <p>{props.good}</p>
-      <p>{props.neutral}</p>
-      <p>{props.bad}</p>
-      <p>{props.all}</p>
-      <p>{props.average}</p>
-      <p>{props.positive}</p>
+      <StatisticsLine show = {props.good}/>
+      <StatisticsLine show = {props.neutral}/>
+      <StatisticsLine show = {props.bad}/>
+      <StatisticsLine show = {props.all}/>
+      <StatisticsLine show = {props.average}/>
+      <StatisticsLine show = {props.positive}/>
     </div>
   )
 }
