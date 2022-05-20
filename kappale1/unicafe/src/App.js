@@ -13,6 +13,27 @@ const Button = ({handleClick, text}) => {
 }
 
 const Statistics = (props) => {
+
+  if(props.good === 0 && props.neutral === 0 && props.bad === 0) {
+    return(
+      <div>
+       <Button 
+      handleClick={props.makeGood}
+      text="good"
+      />
+      <Button 
+      handleClick={props.makeNeutral}
+      text="neutral"
+      />
+      <Button 
+      handleClick={props.makeBad}
+      text="bad"
+      />
+      <h1>No feedback given!</h1>
+      </div>
+    )
+  }
+
   return (
     <div>
        <Button 
