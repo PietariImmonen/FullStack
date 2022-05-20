@@ -28,6 +28,13 @@ const App = () => {
   function makeBad() {
     setBad(bad + 1)
   }
+
+  const all = (good + neutral + bad)
+
+  const average = ((good * 1 + neutral * 0 + bad * (-1)) / all)
+
+  const positive = `${(good / all) * 100}%`
+
   return (
     <div>
       <Button 
@@ -45,6 +52,9 @@ const App = () => {
       <p>{good}</p>
       <p>{neutral}</p>
       <p>{bad}</p>
+      <p>{all}</p>
+      <p>{average}</p>
+      <p>{positive}</p>
     </div>
   )
 }
