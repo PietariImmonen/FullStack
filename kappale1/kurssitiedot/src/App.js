@@ -35,20 +35,11 @@ const Content = ({part}) => {
 
 
 const Total = ({number}) => {
-  function sumAll() {
-    let i;
-    let sum = 0;
-    for (i = 0; i < number.length; i++) {
-      sum += number[i].exercises;
-    }
-    return sum;
-  }
-    
-  
+  const sum = number.reduce((a, b) => a + b.exercises, 0)
 
   return (
     <div>
-      <p>{sumAll()}</p>
+      <p>{sum}</p>
     </div>
   )
 }
