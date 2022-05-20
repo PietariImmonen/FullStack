@@ -16,6 +16,15 @@ const StatisticsLine = ({show}) => {
   return(
     <div>
       <p>{show}</p>
+      
+    </div>
+  )
+}
+const StatisticsName = ({name}) => {
+  return(
+    <div>
+      <p>{name}</p>
+      
     </div>
   )
 }
@@ -56,12 +65,34 @@ const Statistics = (props) => {
       handleClick={props.makeBad}
       text="bad"
       />
-      <StatisticsLine show = {props.good}/>
-      <StatisticsLine show = {props.neutral}/>
-      <StatisticsLine show = {props.bad}/>
-      <StatisticsLine show = {props.all}/>
-      <StatisticsLine show = {props.average}/>
-      <StatisticsLine show = {props.positive}/>
+      <table>
+        <tbody>
+        <tr>
+          <td><StatisticsName name="good"/></td>
+          <td><StatisticsLine show = {props.good}/></td>
+        </tr>
+        <tr>
+          <td><StatisticsName name="neutral"/></td>
+          <td><StatisticsLine show = {props.neutral}/></td>
+        </tr>
+        <tr>
+          <td><StatisticsName name="bad"/></td>
+          <td><StatisticsLine show = {props.bad}/></td>
+        </tr>
+        <tr>
+          <td><StatisticsName name="all"/></td>
+          <td><StatisticsLine show = {props.all}/></td>
+        </tr>
+        <tr>
+          <td><StatisticsName name="average"/></td>
+          <td><StatisticsLine show = {props.average}/></td>
+        </tr>
+        <tr>
+          <td><StatisticsName name="positive"/></td>
+          <td><StatisticsLine show = {props.positive}/></td>
+        </tr>
+        </tbody>
+      </table>
     </div>
   )
 }
