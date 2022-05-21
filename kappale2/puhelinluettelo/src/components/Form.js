@@ -14,6 +14,12 @@ const Form = (props) => {
             number: <input 
             value={props.newNumber}
             onChange={props.handleNumberChange}/>
+        </div>
+        
+        <div>
+            Filter: <input 
+            value={props.newSearch}
+            onChange={props.handleSearchChange}/>
             </div>
         <div>
           <button type="submit">add</button>

@@ -8,7 +8,12 @@ const App = () => {
   ]) 
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
+  const [newSearch, setNewSearch] = useState('')
 
+  let personsToShow = persons
+  if(newSearch) {
+    personsToShow = persons.filter((person => person["name"].includes(newSearch)))
+  }
 
   const handlePersonChange = (event) => {
     console.log(event.target.value)
@@ -18,6 +23,11 @@ const App = () => {
   const handleNumberChange = (event) => {
     console.log(event.target.value)
     setNewNumber(event.target.value)
+  }
+
+  const handleSearchChange = (event) => {
+    console.log(event.target.value)
+    setNewSearch(event.target.value)
   }
 
   const addPerson = (event) => {
@@ -39,15 +49,17 @@ const App = () => {
   return (
     <div>
       <Persons 
-        persons = {persons}
+        persons = {personsToShow}
       />
 
       <Form 
         addPerson={addPerson}
         handlePersonChange={handlePersonChange}
         handleNumberChange={handleNumberChange}
+        handleSearchChange={handleSearchChange}
         newName={newName}
         newNumber={newNumber}
+        newSearch={newSearch}
       />
       <h2>Numbers</h2>
       ...
