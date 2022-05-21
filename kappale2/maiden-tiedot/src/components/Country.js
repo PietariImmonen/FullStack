@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import Weather from './Weather'
 
 const Country = ({name, capital, area, languages, img, number}) => {
     const [show, setShow] = useState(false)
@@ -11,6 +12,9 @@ const Country = ({name, capital, area, languages, img, number}) => {
                 <h3>Area: {area}</h3>
                 Languages: {languages && Object.values(languages).map((key, index) => {return(<p key={index}>{key}</p>)})}
                 <img src={img} alt=""/>
+                <Weather 
+                city={capital}
+                />
             </div>
         )
     }
@@ -20,8 +24,11 @@ const Country = ({name, capital, area, languages, img, number}) => {
                     <h3>Area: {area}</h3>
                     Languages: {languages && Object.values(languages).map((key, index) => {return(<p key={index}>{key}</p>)})}
                     <img src={img} alt=""/>
+                    <Weather 
+                    city={capital}
+                    />
                 </div>
-                
+
   return (
     <div>
         <h1>Name: {name} <button onClick={() => setShow(!show)}>Show</button></h1>
