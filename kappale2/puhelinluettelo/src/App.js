@@ -4,14 +4,20 @@ import Persons from './components/Persons'
 
 const App = () => {
   const [persons, setPersons] = useState([
-    { name: 'Arto Hellas' }
+    { name: 'Arto Hellas', number: "12313123123" }
   ]) 
   const [newName, setNewName] = useState('')
+  const [newNumber, setNewNumber] = useState('')
 
 
   const handlePersonChange = (event) => {
     console.log(event.target.value)
     setNewName(event.target.value)
+  }
+
+  const handleNumberChange = (event) => {
+    console.log(event.target.value)
+    setNewNumber(event.target.value)
   }
 
   const addPerson = (event) => {
@@ -21,11 +27,13 @@ const App = () => {
       return
     }
     const personObject = {
-      name: newName
+      name: newName,
+      number: newNumber,
     }
 
     setPersons(persons.concat(personObject))
     setNewName('')
+    setNewNumber("")
   }
 
   return (
@@ -37,7 +45,9 @@ const App = () => {
       <Form 
         addPerson={addPerson}
         handlePersonChange={handlePersonChange}
+        handleNumberChange={handleNumberChange}
         newName={newName}
+        newNumber={newNumber}
       />
       <h2>Numbers</h2>
       ...
