@@ -1,13 +1,10 @@
 import { useEffect, useState } from 'react'
 import Form from './components/Form'
 import Persons from './components/Persons'
-import axios from "axios"
 import phoneService from './services/phoneService'
 
 const App = () => {
-  const [persons, setPersons] = useState([
-    { name: 'Arto Hellas', number: "12313123123" }
-  ]) 
+  const [persons, setPersons] = useState([]) 
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
   const [newSearch, setNewSearch] = useState('')
@@ -15,7 +12,7 @@ const App = () => {
   useEffect(() => {
     phoneService.getAll()
     .then(all => setPersons(all))
-  },[])
+  },[persons])
 
   let personsToShow = persons
   if(newSearch) {
@@ -58,10 +55,20 @@ const App = () => {
       })
   }
 
+  const deletePerson = (id) => {
+    if((window.confirm("delete really"))) {
+      phoneService
+    .del(id)
+      .then(
+      setPersons(persons.filter(p => p.id !== id)))
+    }
+  }
+
   return (
     <div>
       <Persons 
         persons = {personsToShow}
+        handleClick = {deletePerson}
       />
 
       <Form 
