@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import Form from './components/Form'
 import Persons from './components/Persons'
 import axios from "axios"
+import phoneService from './services/phoneService'
 
 const App = () => {
   const [persons, setPersons] = useState([
@@ -11,11 +12,10 @@ const App = () => {
   const [newNumber, setNewNumber] = useState('')
   const [newSearch, setNewSearch] = useState('')
 
-  useEffect(() => {axios
-    .get('http://localhost:3001/persons')
-    .then(response => {
-      setPersons(response.data)
-    })},[])
+  useEffect(() => {
+    phoneService.getAll()
+    .then(all => setPersons(all))
+  },[])
 
   let personsToShow = persons
   if(newSearch) {
@@ -48,9 +48,14 @@ const App = () => {
       number: newNumber,
     }
 
-    setPersons(persons.concat(personObject))
-    setNewName('')
-    setNewNumber("")
+    phoneService
+      .create(personObject)
+        .then(returnedPerson => {
+          console.log(returnedPerson)
+        setPersons(persons.concat(returnedPerson))
+        setNewName('')
+        setNewNumber('')
+      })
   }
 
   return (
