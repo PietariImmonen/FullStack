@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import Form from './components/Form'
+import Notifications from './components/Notifications'
 import Persons from './components/Persons'
 import phoneService from './services/phoneService'
 
@@ -8,6 +9,7 @@ const App = () => {
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
   const [newSearch, setNewSearch] = useState('')
+  const [message, setMessage] = useState('')
 
   useEffect(() => {
     phoneService.getAll()
@@ -47,6 +49,11 @@ const App = () => {
         .then(returnedPerson => {
           setPersons(persons.map(person => person.id !== humanId ? person : returnedPerson))
         })
+        .catch(error => {
+          setMessage(`Error changing number${error}`)
+          setPersons(persons.filter(p => p.id !== humanId))
+        })
+        setMessage(`Added ${human.name} new phone number`)
       return
     }
     const personObject = {
@@ -62,6 +69,7 @@ const App = () => {
         setNewName('')
         setNewNumber('')
       })
+      setMessage(`Added ${personObject.name} to phone book`)
   }
 
   const deletePerson = (id) => {
@@ -71,10 +79,12 @@ const App = () => {
       .then(
       setPersons(persons.filter(p => p.id !== id)))
     }
+    setMessage(`Deleted person`)
   }
 
   return (
     <div>
+      <Notifications msg = {message}/>
       <Persons 
         persons = {personsToShow}
         handleClick = {deletePerson}
