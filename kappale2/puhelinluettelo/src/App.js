@@ -12,7 +12,7 @@ const App = () => {
   useEffect(() => {
     phoneService.getAll()
     .then(all => setPersons(all))
-  },[persons])
+  },[])
 
   let personsToShow = persons
   if(newSearch) {
@@ -37,7 +37,16 @@ const App = () => {
   const addPerson = (event) => {
     event.preventDefault()
     if(persons.some(person => person["name"] === newName)) {
-      window.alert(`${newName} is already added to phonebook`)
+      window.alert(`You wanted to change ${newName} number?`)
+      const human = persons.find(n => n.name === newName)
+      const humanId = human.id;
+      const changedNote = { ...human, number: newNumber}
+
+      phoneService
+        .update(humanId, changedNote)
+        .then(returnedPerson => {
+          setPersons(persons.map(person => person.id !== humanId ? person : returnedPerson))
+        })
       return
     }
     const personObject = {
