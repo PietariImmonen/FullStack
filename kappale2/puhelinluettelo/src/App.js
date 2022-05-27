@@ -66,9 +66,28 @@ const App = () => {
         .then(returnedPerson => {
           console.log(returnedPerson)
         setPersons(persons.concat(returnedPerson))
-        setNewName('')
-        setNewNumber('')
       })
+
+      if(!(personObject.number.length === 10 || personObject.number.length === 11)) {
+        setMessage(`Wrong number: ${personObject.number} `)
+        setNewName('')
+        setNewNumber("")
+        return
+      }
+
+      if(!((personObject.number.charAt(2) === '-') || (personObject.number.charAt(3) === '-'))) {
+        setMessage(`Wrong number: ${personObject.number} `)
+        setNewName('')
+        setNewNumber("")
+        return
+      }
+
+      if(personObject.name.length < 3) {
+        setMessage(`Too small name: ${personObject.name} `)
+        setNewName('')
+        setNewNumber("")
+        return
+      }
       setMessage(`Added ${personObject.name} to phone book`)
   }
 
