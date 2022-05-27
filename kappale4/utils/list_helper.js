@@ -1,3 +1,4 @@
+const { fromPairs } = require('lodash');
 var _ = require('lodash');
 
 const dummy = (blogs) => {
@@ -37,10 +38,30 @@ const favoriteAuthor = (blogs) => {
 }
 
 
+
+const authorMostLikes = (blogs) => { 
+    const authorLike = blogs.map(({author, likes}) => ({author, likes}))
+
+    let combined = authorLike.reduce((i, j) => {
+        i[j.author] = (i[j.author] || 0) + j.likes;
+        return i;
+      }, {});
+
+    let dataArray = []
+
+    for(let o in combined) {
+        let key = Object.keys(combined)[0]
+        dataArray.push({"author": key, "likes": combined[o]})
+    }
+    return dataArray[0]
+}
+
+
   
 module.exports = {
     dummy,
     totalLikes,
     favoriteAuthor,
-    favoriteBlog
+    favoriteBlog,
+    authorMostLikes
   }

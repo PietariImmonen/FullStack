@@ -88,3 +88,42 @@ describe('best author', () => {
       expect(result).toBe('Edsger W. Dijkstra')
     })
   })
+
+describe('best author likes', () => {
+    const listWithOneBlog = [
+      {
+        _id: '5a422aa71b54a676234d17f8',
+        title: 'Go To Statement Considered Harmful',
+        author: 'Edsger W. Dijkstra',
+        url: 'http://www.u.arizona.edu/~rubinson/copyright_violations/Go_To_Considered_Harmful.html',
+        likes: 5,
+        __v: 0
+      },
+      {
+        _id: '5a422aa71b54a676234d17f8',
+        title: 'Go To Statement Considered Harmful',
+        author: 'Edsger W. Dijkstra',
+        url: 'http://www.u.arizona.edu/~rubinson/copyright_violations/Go_To_Considered_Harmful.html',
+        likes: 6,
+        __v: 0
+      },
+      {
+        _id: '5a422aa71b54a676234d17f8',
+        title: 'Go To Statement Considered Harmful',
+        author: 'Edsger W. Dijkst',
+        url: 'http://www.u.arizona.edu/~rubinson/copyright_violations/Go_To_Considered_Harmful.html',
+        likes: 6,
+        __v: 0
+      }
+    ]
+
+    const best = {
+        author: 'Edsger W. Dijkstra',
+        likes: 11,
+      }
+  
+    test('this is the favortie blog', () => {
+      const result = listHelper.authorMostLikes(listWithOneBlog)
+      expect(result).toEqual(best)
+    })
+})
