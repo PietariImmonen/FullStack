@@ -2,7 +2,7 @@ var _ = require('lodash');
 const listHelper = require('../utils/list_helper')
 
 
-/*describe('total likes', () => {
+describe('total likes', () => {
     const listWithOneBlog = [
       {
         _id: '5a422aa71b54a676234d17f8',
@@ -18,9 +18,9 @@ const listHelper = require('../utils/list_helper')
       const result = listHelper.totalLikes(listWithOneBlog)
       expect(result).toBe(5)
     })
-  }) */
+  }) 
 
-/*describe('best', () => {
+describe('best', () => {
     const listWithOneBlog = [
       {
         _id: '5a422aa71b54a676234d17f8',
@@ -53,7 +53,7 @@ const listHelper = require('../utils/list_helper')
       const result = listHelper.favoriteBlog(listWithOneBlog)
       expect(result).toEqual(best)
     })
-}) */
+})
 
 describe('best author', () => {
     const listWithOneBlog = [
