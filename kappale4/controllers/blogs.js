@@ -1,5 +1,6 @@
 const blogsRouter = require('express').Router()
 const Blog = require('../models/blog')
+const { nonExistingId } = require('../tests/test_helper')
 
 
 blogsRouter.get('/', async(request, response) => {
@@ -7,14 +8,15 @@ blogsRouter.get('/', async(request, response) => {
     response.json(blogs)
   })
 
-blogsRouter.post('/', async (request, response) => {
+blogsRouter.post('/', async (request, response, next) => {
+  
     const body = request.body
-
-    let like = 0
+      let like = 0
 
     if(body.likes) {
       like = body.likes
     }
+
 
     const blog = new Blog({
       title: body.title,
@@ -22,9 +24,8 @@ blogsRouter.post('/', async (request, response) => {
       url: body.url,
       likes: like
     })
-  
-    const savedBlog = await blog.save()
-    response.status(201).json(savedBlog)
+      const savedBlog = await blog.save()
+      response.status(201).json(savedBlog)
   })
 
 

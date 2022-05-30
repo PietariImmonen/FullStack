@@ -78,19 +78,35 @@ test('blog without likes is added', async () => {
 }
 
 await api
-.post('/api/blogs')
-.send(newBlog)
-.expect(201)
-.expect('Content-Type', /application\/json/)
+    .post('/api/blogs')
+    .send(newBlog)
+    .expect(201)
+    .expect('Content-Type', /application\/json/)
 
-const blogsAtEnd = await helper.blogsInDb()
-expect(blogsAtEnd).toHaveLength(helper.initialBlogs.length + 1)
+    const blogsAtEnd = await helper.blogsInDb()
+    expect(blogsAtEnd).toHaveLength(helper.initialBlogs.length + 1)
 
-const likes = blogsAtEnd.map(n => n.likes)
-expect(likes).toContain(
-0
-)
+    const likes = blogsAtEnd.map(n => n.likes)
+    expect(likes).toContain(
+    0
+    )
 })
+
+
+test('blog without content is not added', async () => {
+  const newBlog = {
+}
+
+  await api
+    .post('/api/blogs')
+    .send(newBlog)
+    .expect(400)
+
+  const blogsAtEnd = await helper.blogsInDb()
+
+  expect(blogsAtEnd).toHaveLength(helper.initialBlogs.length)
+})
+
 
 afterAll(() => {
   mongoose.connection.close()
