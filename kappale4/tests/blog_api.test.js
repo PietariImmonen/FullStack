@@ -62,10 +62,6 @@ test('a valid blog can be added ', async () => {
   )
 })
 
-afterAll(() => {
-  mongoose.connection.close()
-})
-
 test('id is the identifier', async () => {
   const blogsAtStart = await helper.blogsInDb()
 
@@ -74,12 +70,28 @@ test('id is the identifier', async () => {
   expect(blogToView.id).toBeDefined
 })
 
-test('a specific blog is within the returned blogs', async () => {
-  const response = await api.get('/api/blogs')
+test('blog without likes is added', async () => {
+  const newBlog = {
+    title: "newBlog",
+    author: "Mä",
+    url: "Jou123333",
+}
 
-  const titles = response.body.map(r => r.title)
+await api
+.post('/api/blogs')
+.send(newBlog)
+.expect(201)
+.expect('Content-Type', /application\/json/)
 
-  expect(titles).toContain(
-    'Moikka123'
-  )
+const blogsAtEnd = await helper.blogsInDb()
+expect(blogsAtEnd).toHaveLength(helper.initialBlogs.length + 1)
+
+const likes = blogsAtEnd.map(n => n.likes)
+expect(likes).toContain(
+0
+)
+})
+
+afterAll(() => {
+  mongoose.connection.close()
 })
