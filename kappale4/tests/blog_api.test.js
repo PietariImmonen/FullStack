@@ -107,6 +107,46 @@ test('blog without content is not added', async () => {
   expect(blogsAtEnd).toHaveLength(helper.initialBlogs.length)
 })
 
+test('a blog can be deleted', async () => {
+  const blogsAtStart = await helper.blogsInDb()
+  const blogToDelete = blogsAtStart[0]
+  console.log(blogToDelete)
+  await api
+    .delete(`/api/blogs/${blogToDelete.id}`)
+    .expect(204)
+
+  const blogsAtEnd = await helper.blogsInDb()
+
+  expect(blogsAtEnd).toHaveLength(
+    helper.initialBlogs.length - 1
+  )
+
+  const titles = blogsAtEnd.map(r => r.titles)
+
+  expect(titles).not.toContain(blogToDelete.title)
+})
+
+test('blog likes can be changed', async () => {
+  const newBlog = {
+    likes: 12345,
+}
+  const blogsAtStart = await helper.blogsInDb()
+  const blogToPut = blogsAtStart[0]
+
+  await api
+    .put(`/api/blogs/${blogToPut.id}`)
+    .send(newBlog)
+    .expect(200)
+
+    const blogsAtEnd = await helper.blogsInDb()
+    expect(blogsAtEnd).toHaveLength(helper.initialBlogs.length)
+
+    const likes = blogsAtEnd.map(n => n.likes)
+    expect(likes).toContain(
+    12345
+    )
+})
+
 
 afterAll(() => {
   mongoose.connection.close()
