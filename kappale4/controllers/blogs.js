@@ -3,7 +3,7 @@ const Blog = require('../models/blog')
 const { nonExistingId } = require('../tests/test_helper')
 const User = require('../models/user')
 const jwt = require('jsonwebtoken')
-const { verify } = require('jsonwebtoken')
+
 
 
 blogsRouter.get('/', async(request, response) => {
@@ -19,6 +19,7 @@ blogsRouter.get('/', async(request, response) => {
     return null
   }
 
+
 blogsRouter.post('/', async (request, response) => {
   
     const body = request.body
@@ -29,7 +30,7 @@ blogsRouter.post('/', async (request, response) => {
     }
 
     const token = getTokenFrom(request)
-    const decodedToken = jwt.verify(token, process.env.SECRET)
+    const decodedToken = jwt.verify(request.token, process.env.SECRET)
     if (!token || !decodedToken.id) {
       return response.status(401).json({ error: 'token missing or invalid' })
     }
