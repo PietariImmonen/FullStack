@@ -185,6 +185,44 @@ describe('when there is initially one user at db', () => {
   })
 })
 
+test('creating user pw atleast 3 char long', async () => {
+  const usersAtStart = await helper.usersInDb()
+
+  const newUser = {
+    username: 'mluukkai',
+    name: 'Matti Luukkainen',
+    password: 'sa',
+  }
+
+  await api
+    .post('/api/users')
+    .send(newUser)
+    .expect(400)
+    .expect('Content-Type', /application\/json/)
+
+  const usersAtEnd = await helper.usersInDb()
+  expect(usersAtEnd).toHaveLength(usersAtStart.length)
+})
+
+test('creating user with same username', async () => {
+  const usersAtStart = await helper.usersInDb()
+
+  const newUser = {
+    username: 'root',
+    name: 'Matti Luukkainen',
+    password: 'sa',
+  }
+
+  await api
+    .post('/api/users')
+    .send(newUser)
+    .expect(400)
+    .expect('Content-Type', /application\/json/)
+
+  const usersAtEnd = await helper.usersInDb()
+  expect(usersAtEnd).toHaveLength(usersAtStart.length)
+})
+
 
 afterAll(() => {
   mongoose.connection.close()
