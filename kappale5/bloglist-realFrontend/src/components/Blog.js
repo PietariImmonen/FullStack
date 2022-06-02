@@ -1,7 +1,7 @@
-import { useState } from "react"
-import "./blog.css"
+import { useState } from 'react'
+import './blog.css'
 
-const Blog = ({blog, addLike, deleteBlog}) => {
+const Blog = ({ blog, addLike, deleteBlog }) => {
 
   const [isShow, setIsShow] = useState(false)
   console.log(isShow)
@@ -20,20 +20,20 @@ const Blog = ({blog, addLike, deleteBlog}) => {
 
 
   return(
-  <div className="blog">
-    <div>
-      {blog.title}
-      <button onClick={toggle}>View</button>
-      {isShow && 
+    <div className="blog">
+      <div>
+        {blog.title}
+        <button onClick={toggle}>View</button>
+        {isShow &&
         <div>
           <p>{blog.author}</p>
           <p>{blog.url}</p>
           <p>likes: {blog.likes} <button onClick={like}>Like</button></p>
           <p>Delete: <button onClick={del}>Delete</button></p>
         </div>
-      }
+        }
+      </div>
     </div>
-  </div>  
   )
 }
 

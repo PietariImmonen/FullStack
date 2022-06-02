@@ -16,10 +16,10 @@ const App = () => {
 
   useEffect(() => {
     blogService
-    .getAll()
-    .then(blogs1 =>
-      setBlogs( blogs1.data )
-    ) 
+      .getAll()
+      .then(blogs1 =>
+        setBlogs( blogs1.data )
+      )
   }, [])
 
   useEffect(() => {
@@ -33,14 +33,13 @@ const App = () => {
 
   const handleLogin = async (event) => {
     event.preventDefault()
-    
     try {
       const user = await loginService.login({
         username, password,
       })
       window.localStorage.setItem(
         'loggedBlogappUser', JSON.stringify(user)
-      ) 
+      )
       setUser(user)
       blogService.setToken(user.token)
       setUsername('')
@@ -73,10 +72,10 @@ const App = () => {
 
   const addLike = async (id) => {
     const blog = blogs.find(i => i.id === id)
-    const changedBlog = {...blog, likes: blog.likes + 1}
+    const changedBlog = { ...blog, likes: blog.likes + 1 }
     try{
-    const x = await blogService.update(id, changedBlog)
-    setBlogs(blogs.map(blog => blog.id !== id ? blog : x))
+      const x = await blogService.update(id, changedBlog)
+      setBlogs(blogs.map(blog => blog.id !== id ? blog : x))
     } catch(err) {
       setErrorMessage(err)
       setTimeout(() => {
@@ -88,40 +87,39 @@ const App = () => {
   }
 
   const deleteBlog = async (id) => {
-    if((window.confirm("delete really"))) {
+    if((window.confirm('delete really'))) {
       await blogService.del(id)
       setBlogs(blogs.filter(p => p.id !== id))
     }
-    setErrorMessage(`Deleted blog`)
+    setErrorMessage('Deleted blog')
   }
 
   const blogsSorted = blogs.sort((a,b) => b.likes-a.likes)
   console.log(blogsSorted)
-  
 
   return (
     <div>
       {errorMessage !== null && <Notifications msg = {errorMessage}/>}
       <div>
-        {user === null 
-        ? <LoginForm 
+        {user === null
+          ? <LoginForm
             username={username}
             password={password}
             handleLogin={handleLogin}
             setUsername={setUsername}
             setPassword={setPassword}
-        />
-        : <div>
-          <h3>{user.name}</h3>
-          {blogsSorted.map(blog =>
-          <Blog key={blog.id} blog={blog} addLike={addLike} deleteBlog={deleteBlog}/>
-          )}
-          <Togglable buttonLabel="Create new blog">
-          <BlogForm 
-            sendBlog={addBlog}
           />
-          </Togglable>
-          <button onClick={logOut}>Log out</button>
+          : <div>
+            <h3>{user.name}</h3>
+            {blogsSorted.map(blog =>
+              <Blog key={blog.id} blog={blog} addLike={addLike} deleteBlog={deleteBlog}/>
+            )}
+            <Togglable buttonLabel="Create new blog">
+              <BlogForm
+                sendBlog={addBlog}
+              />
+            </Togglable>
+            <button onClick={logOut}>Log out</button>
           </div>
         }
       </div>

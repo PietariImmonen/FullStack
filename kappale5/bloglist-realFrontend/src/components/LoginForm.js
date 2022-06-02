@@ -1,11 +1,11 @@
 import React from 'react'
 
-const LoginForm = ({username, password, setUsername, setPassword, handleLogin}) => {
+const LoginForm = ({ username, password, setUsername, setPassword, handleLogin }) => {
   return (
     <div>
-        <form onSubmit={handleLogin}>
-      <h3>Login</h3>
-      <div>
+      <form onSubmit={handleLogin}>
+        <h3>Login</h3>
+        <div>
           username
           <input
             type="text"
@@ -13,8 +13,8 @@ const LoginForm = ({username, password, setUsername, setPassword, handleLogin}) 
             name="Username"
             onChange={({ target }) => setUsername(target.value)}
           />
-      </div>
-      <div>
+        </div>
+        <div>
           password
           <input
             type="password"
@@ -22,9 +22,9 @@ const LoginForm = ({username, password, setUsername, setPassword, handleLogin}) 
             name="Password"
             onChange={({ target }) => setPassword(target.value)}
           />
-      </div>
-      <button type="submit">login</button>
-    </form> 
+        </div>
+        <button type="submit">login</button>
+      </form>
     </div>
   )
 }
