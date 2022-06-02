@@ -1,13 +1,17 @@
 import { useState } from "react"
 import "./blog.css"
 
-const Blog = ({blog}) => {
+const Blog = ({blog, addLike}) => {
 
   const [isShow, setIsShow] = useState(false)
   console.log(isShow)
 
   const toggle = () => {
     setIsShow(!isShow)
+  }
+
+  const like = () => {
+    addLike(blog.id)
   }
 
 
@@ -20,7 +24,7 @@ const Blog = ({blog}) => {
         <div>
           <p>{blog.author}</p>
           <p>{blog.url}</p>
-          <p>likes: {blog.likes} <button>like</button></p>
+          <p>likes: {blog.likes} <button onClick={like}>Like</button></p>
         </div>
       }
     </div>

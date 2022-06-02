@@ -70,6 +70,22 @@ const App = () => {
         }, 3000)
       })
   }
+
+  const addLike = async (id) => {
+    const blog = blogs.find(i => i.id === id)
+    const changedBlog = {...blog, likes: blog.likes + 1}
+    try{
+    const x = await blogService.update(id, changedBlog)
+    setBlogs(blogs.map(blog => blog.id !== id ? blog : x))
+    } catch(err) {
+      setErrorMessage(err)
+      setTimeout(() => {
+        setErrorMessage(null)
+      }, 5000)
+      setBlogs(blogs.filter(i => i.id !== id))
+    }
+
+  }
   
 
   return (
@@ -87,7 +103,7 @@ const App = () => {
         : <div>
           <h3>{user.name}</h3>
           {blogs.map(blog =>
-          <Blog key={blog.id} blog={blog} />
+          <Blog key={blog.id} blog={blog} addLike={addLike} />
           )}
           <Togglable buttonLabel="Create new blog">
           <BlogForm 
