@@ -22,11 +22,10 @@ const Blog = ({ blog, addLike, deleteBlog }) => {
   return(
     <div className="blog">
       <div>
-        {blog.title}
+        <p className='title'>Title: {blog.title} Author: {blog.author}</p>
         <button onClick={toggle}>View</button>
         {isShow &&
-        <div>
-          <p>{blog.author}</p>
+        <div className='urlNlikes'>
           <p>{blog.url}</p>
           <p>likes: {blog.likes} <button onClick={like}>Like</button></p>
           <p>Delete: <button onClick={del}>Delete</button></p>
