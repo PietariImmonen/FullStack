@@ -62,7 +62,7 @@ test('clicking the button calls event handler once', async () => {
 })
 
 
-test('<BLog /> updates parent state and calls onSubmit', async () => {
+test('<BlogForm /> updates parent state and calls onSubmit', async () => {
   const user = userEvent.setup()
   const createBlog = jest.fn()
 
