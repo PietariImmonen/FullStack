@@ -87,6 +87,14 @@ const App = () => {
 
   }
 
+  const deleteBlog = async (id) => {
+    if((window.confirm("delete really"))) {
+      await blogService.del(id)
+      setBlogs(blogs.filter(p => p.id !== id))
+    }
+    setErrorMessage(`Deleted blog`)
+  }
+
   const blogsSorted = blogs.sort((a,b) => b.likes-a.likes)
   console.log(blogsSorted)
   
@@ -106,7 +114,7 @@ const App = () => {
         : <div>
           <h3>{user.name}</h3>
           {blogsSorted.map(blog =>
-          <Blog key={blog.id} blog={blog} addLike={addLike} />
+          <Blog key={blog.id} blog={blog} addLike={addLike} deleteBlog={deleteBlog}/>
           )}
           <Togglable buttonLabel="Create new blog">
           <BlogForm 
