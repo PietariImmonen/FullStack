@@ -119,7 +119,7 @@ const App = () => {
                 sendBlog={addBlog}
               />
             </Togglable>
-            <button onClick={logOut}>Log out</button>
+            <button onClick={logOut} id='gg'>Log out</button>
           </div>
         }
       </div>
