@@ -23,12 +23,12 @@ const Blog = ({ blog, addLike, deleteBlog }) => {
     <div className="blog">
       <div>
         <p className='title'>Title: {blog.title} Author: {blog.author}</p>
-        <button onClick={toggle}>View</button>
+        <button onClick={toggle} id='blogView'>View</button>
         {isShow &&
         <div className='urlNlikes'>
           <p>{blog.url}</p>
-          <p>likes: {blog.likes} <button onClick={like}>Like</button></p>
-          <p>Delete: <button onClick={del}>Delete</button></p>
+          <p>likes: {blog.likes} <button onClick={like} id='like'>Like</button></p>
+          <p>Delete: <button onClick={del} id='del'>Delete</button></p>
         </div>
         }
       </div>
