@@ -31,7 +31,7 @@ const reducer = (state = initialState, action) => {
       return state.map(anec =>
         anec.id === id ? votedAnec : anec)
     case 'ADD':
-      return [...state, action.data]
+      return [...state, asObject(action.data.content)]
     default: return state
   }
 }
