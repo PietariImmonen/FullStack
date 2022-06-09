@@ -1,10 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit'
 
-const initialState = [
+const initialState = 
     {
-        message: "hello"
+        message: ""
     }
-]
+
 
 
 const notificationReducer = createSlice({
@@ -12,10 +12,13 @@ const notificationReducer = createSlice({
     initialState,
     reducers: {
       setNotification(state, action) {
-        state.concat(action.message)
+        const content = action.payload
+        state.message = content
       },
-      
+      removeNotification(state, action) {
+        state.message = ''
+      }
     },
 })
-
+export const { setNotification, removeNotification } = notificationReducer.actions
 export default notificationReducer.reducer
