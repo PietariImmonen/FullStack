@@ -15,7 +15,7 @@ const Anec = ({ anec, handleClick }) => {
 
 const Anecs = () => {
   const dispatch = useDispatch()
-  const anecs = useSelector(state => state)
+  const anecs = useSelector(state => state.anecs)
   const anecsSorted = anecs.sort((a,b) => b.votes - a.votes)
 
   return(
