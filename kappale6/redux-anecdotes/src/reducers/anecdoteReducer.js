@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
+import anecService from '../services/anecs'
 
 
 
@@ -37,4 +38,12 @@ const anecSlice = createSlice({
 
 
 export const { createAnec, voteAnec, appendAnec, setAnec } = anecSlice.actions
+
+  export const initializeAnecs = () => {
+    return async dispatch => {
+      const anecs = await anecService.getAll()
+      dispatch(setAnec(anecs))
+    }
+  }
+
 export default anecSlice.reducer
