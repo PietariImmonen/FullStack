@@ -12,10 +12,6 @@ const anecSlice = createSlice({
   name: 'anecdotes',
   initialState: [],
   reducers: {
-    createAnec(state, action) {
-      const newAnec = action.payload
-      state.push(newAnec)
-    },
     voteAnec(state, action) {
       const id = action.payload
       const anecToVote = state.find(n => n.id === id)
@@ -43,6 +39,13 @@ export const { createAnec, voteAnec, appendAnec, setAnec } = anecSlice.actions
     return async dispatch => {
       const anecs = await anecService.getAll()
       dispatch(setAnec(anecs))
+    }
+  }
+
+  export const createNew = (content) => {
+    return async dispatch => {
+      const item = await anecService.createNew(content)
+      dispatch(appendAnec(item))
     }
   }
 
