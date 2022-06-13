@@ -1,11 +1,11 @@
 import { useDispatch, useSelector } from 'react-redux'
-import { voteAnec } from '../reducers/anecdoteReducer'
+import { voteAnec2 } from '../reducers/anecdoteReducer'
 import { removeNotification, setNotification } from '../reducers/notificationReducer'
 
 const Anec = ({ anec }) => {
     const dispatch = useDispatch()
     const combined = () => {
-        dispatch(voteAnec(anec.id))
+        dispatch(voteAnec2(anec))
         dispatch(setNotification(`You voted ${anec.content}`))
         setTimeout(() => {
             dispatch(removeNotification())
@@ -24,8 +24,9 @@ const Anec = ({ anec }) => {
 
 const Anecs = () => {
   const anecs = useSelector(state => state.anecs)
-  const copyAnecs = [...anecs]
-  const sorted = copyAnecs.sort((a,b) => (b.votes - a.votes))
+  const copy = [...anecs]
+  const sorted = copy.sort((a,b) => b.votes - a.votes)
+  console.log(anecs)
   return(
     <ul>
       {sorted.map(anec =>

@@ -49,4 +49,16 @@ export const { createAnec, voteAnec, appendAnec, setAnec } = anecSlice.actions
     }
   }
 
+  export const voteAnec2 = (anec) => {
+    return async dispatch => {
+      const updateAnec = {
+        ...anec,
+        votes: anec.votes + 1,
+      }
+      const updatedAnec = await anecService.voteAnec(updateAnec)
+      const {id} = updatedAnec
+      dispatch(voteAnec(id))
+    }
+  }
+
 export default anecSlice.reducer
